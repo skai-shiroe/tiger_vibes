@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:tiger_vibes/models/song_model.dart';
 import 'package:tiger_vibes/widgets/player_buttons.dart';
