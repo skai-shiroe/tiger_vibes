@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:tiger_vibes/genius_service.dart';
+import 'package:tiger_vibes/models/song_model.dart';
 
 class PlayerButtons extends StatelessWidget {
   const PlayerButtons({
@@ -7,17 +10,37 @@ class PlayerButtons extends StatelessWidget {
     required this.audioPlayer,
     required this.onNext,
     required this.onPrevious,
+    required this.song,
   });
 
   final AudioPlayer audioPlayer;
   final VoidCallback onNext;
   final VoidCallback onPrevious;
+  final Song song;
+
+ void _showLyrics(BuildContext context) async {
+  try {
+    final lyrics = await GeniusService.fetchLyrics(song.title, song.artist);
+    Get.toNamed('/lyrics', arguments: lyrics ?? 'Paroles non trouvées');
+  } catch (e) {
+    print('Error fetching lyrics: $e');
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        IconButton(
+          iconSize: 35,
+          onPressed: () {},
+          icon: const Icon(
+            Icons.favorite,
+            color: Colors.white,
+          ),
+        ),
         StreamBuilder<SequenceState?>(
           stream: audioPlayer.sequenceStateStream,
           builder: (context, snapshot) {
@@ -90,6 +113,14 @@ class PlayerButtons extends StatelessWidget {
               ),
             );
           },
+        ),
+        IconButton(
+          iconSize: 35,
+          onPressed: () => _showLyrics(context),
+          icon: const Icon(
+            Icons.lyrics,
+            color: Colors.white,
+          ),
         ),
       ],
     );

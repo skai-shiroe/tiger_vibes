@@ -42,11 +42,13 @@ class SongPageState extends State<SongPage> {
     super.dispose();
   }
 
-  Stream<SeekBarData> get seekBarDataStream => rxdart.Rx.combineLatest2<Duration, Duration?, SeekBarData>(
-    audioPlayer.positionStream,
-    audioPlayer.durationStream,
-    (position, duration) => SeekBarData(position, duration ?? Duration.zero),
-  );
+  Stream<SeekBarData> get seekBarDataStream =>
+      rxdart.Rx.combineLatest2<Duration, Duration?, SeekBarData>(
+        audioPlayer.positionStream,
+        audioPlayer.durationStream,
+        (position, duration) =>
+            SeekBarData(position, duration ?? Duration.zero),
+      );
 
   void _nextSong() {
     if (currentSongIndex < songs.length - 1) {
@@ -121,13 +123,19 @@ class MusicPlayer extends StatelessWidget {
         children: [
           Text(
             song.title,
-            style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall!
+                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
           Text(
             song.description,
             maxLines: 2,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 15),
           StreamBuilder<SeekBarData>(
@@ -142,40 +150,8 @@ class MusicPlayer extends StatelessWidget {
               );
             },
           ),
-          PlayerButtons(audioPlayer: audioPlayer, onNext: onNext, onPrevious: onPrevious),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                  iconSize: 40,
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite,
-                    color: Colors.white,
-                  ),
-                ),
-                IconButton(
-                  iconSize: 40,
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.lyrics,
-                    color: Colors.white,
-                  ),
-                ),
-                IconButton(
-                  iconSize: 40,
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          PlayerButtons(
+              audioPlayer: audioPlayer, onNext: onNext, onPrevious: onPrevious, song: song, ),
         ],
       ),
     );
