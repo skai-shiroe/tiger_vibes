@@ -3,30 +3,35 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:tiger_vibes/genius_service.dart';
 import 'package:tiger_vibes/models/song_model.dart';
+import 'package:tiger_vibes/screens/lyrics_screen.dart';
+
 
 class PlayerButtons extends StatelessWidget {
   const PlayerButtons({
-    super.key,
+    Key? key,
     required this.audioPlayer,
     required this.onNext,
     required this.onPrevious,
     required this.song,
-  });
+  }) : super(key: key);
 
   final AudioPlayer audioPlayer;
   final VoidCallback onNext;
   final VoidCallback onPrevious;
   final Song song;
 
- void _showLyrics(BuildContext context) async {
+  void _showLyrics(BuildContext context) async {
   try {
     final lyrics = await GeniusService.fetchLyrics(song.title, song.artist);
-    Get.toNamed('/lyrics', arguments: lyrics ?? 'Paroles non trouvées');
+    Get.to(() => LyricsPage(
+      lyrics: lyrics ?? 'Paroles non trouvées',
+      songTitle: song.title,
+      artist: song.artist,
+    ));
   } catch (e) {
     print('Error fetching lyrics: $e');
   }
 }
-
 
   @override
   Widget build(BuildContext context) {

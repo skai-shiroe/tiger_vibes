@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' show parse;
-import 'package:html/dom.dart';
 
 class GeniusService {
   static const String _baseUrl = 'api.genius.com';
@@ -51,9 +50,4 @@ class GeniusService {
       return 'Paroles non trouvées';
     }
   }
-}
-
-void main() async {
-  String? lyrics = await GeniusService.fetchLyrics('Kaaris', 'Zoo');
-  print(lyrics);
 }
