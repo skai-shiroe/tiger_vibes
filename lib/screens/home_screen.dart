@@ -15,14 +15,15 @@ class HomeScreen extends StatelessWidget {
     List<Playlist> playlists = Playlist.playlists;
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color.fromARGB(110, 255, 255, 255),
-            Color.fromARGB(129, 0, 0, 0),
-          ],
-        ),
+        color: Color.fromARGB(255, 2, 8, 23),
+        // gradient: LinearGradient(
+        //   begin: Alignment.topCenter,
+        //   end: Alignment.bottomCenter,
+        //   colors: [
+        //     Color.fromARGB(110, 255, 255, 255),
+        //     Color.fromARGB(129, 0, 0, 0),
+        //   ],
+        // ),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -52,7 +53,7 @@ class PlaylistMusic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding( 
+    return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [

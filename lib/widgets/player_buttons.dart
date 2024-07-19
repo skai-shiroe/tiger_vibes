@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:tiger_vibes/genius_service.dart';
 import 'package:tiger_vibes/models/song_model.dart';
 import 'package:tiger_vibes/screens/lyrics_screen.dart';
-
 
 class PlayerButtons extends StatelessWidget {
   const PlayerButtons({
@@ -21,17 +21,17 @@ class PlayerButtons extends StatelessWidget {
   final Song song;
 
   void _showLyrics(BuildContext context) async {
-  try {
-    final lyrics = await GeniusService.fetchLyrics(song.title, song.artist);
-    Get.to(() => LyricsPage(
-      lyrics: lyrics ?? 'Paroles non trouvées',
-      songTitle: song.title,
-      artist: song.artist,
-    ));
-  } catch (e) {
-    print('Error fetching lyrics: $e');
+    try {
+      final lyrics = await GeniusService.fetchLyrics(song.title, song.artist);
+      Get.to(() => LyricsPage(
+            lyrics: lyrics ?? 'Paroles non trouvées',
+            songTitle: song.title,
+            artist: song.artist,
+          ));
+    } catch (e) {
+      print('Error fetching lyrics: $e');
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class PlayerButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
-          iconSize: 35,
+          iconSize: 25,
           onPressed: () {},
           icon: const Icon(
             Icons.favorite,
@@ -122,9 +122,11 @@ class PlayerButtons extends StatelessWidget {
         IconButton(
           iconSize: 35,
           onPressed: () => _showLyrics(context),
-          icon: const Icon(
-            Icons.lyrics,
+          icon: SvgPicture.asset(
+            'assets/icons/mic-vocal.svg',
             color: Colors.white,
+            width: 25,
+            height: 25,
           ),
         ),
       ],

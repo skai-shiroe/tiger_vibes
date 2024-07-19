@@ -151,7 +151,11 @@ class MusicPlayer extends StatelessWidget {
             },
           ),
           PlayerButtons(
-              audioPlayer: audioPlayer, onNext: onNext, onPrevious: onPrevious, song: song, ),
+            audioPlayer: audioPlayer,
+            onNext: onNext,
+            onPrevious: onPrevious,
+            song: song,
+          ),
         ],
       ),
     );
@@ -184,7 +188,7 @@ class BackgroundFilter extends StatelessWidget {
             end: Alignment.bottomCenter,
             colors: [
               Colors.black,
-              Color.fromARGB(255, 88, 86, 86),
+              Color.fromARGB(211, 2, 8, 23),
             ],
           ),
         ),

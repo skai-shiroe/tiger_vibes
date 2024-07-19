@@ -40,7 +40,7 @@ class SongCard extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Colors.white.withOpacity(0.8),
+                color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.8),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -55,7 +55,7 @@ class SongCard extends StatelessWidget {
                             .textTheme
                             .headlineSmall!
                             .copyWith(
-                                color: const Color.fromARGB(255, 0, 0, 0),
+                                color: Color.fromARGB(255, 255, 253, 253),
                                 fontWeight: FontWeight.bold),
                       ),
                       Text(

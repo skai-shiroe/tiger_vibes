@@ -21,14 +21,15 @@ class PlaylistCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(110, 255, 255, 255),
-              Color.fromARGB(129, 0, 0, 0),
-            ],
-          ),
+          color: const Color.fromARGB(255, 30, 41, 59),
+          // gradient: const LinearGradient(
+          //   begin: Alignment.topCenter,
+          //   end: Alignment.bottomCenter,
+          //   colors: [
+          //     Color.fromARGB(110, 255, 255, 255),
+          //     Color.fromARGB(129, 0, 0, 0),
+          //   ],
+          // ),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -43,7 +44,7 @@ class PlaylistCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             Expanded(
@@ -69,7 +70,7 @@ class PlaylistCard extends StatelessWidget {
               onPressed: () {},
               icon: const Icon(
                 Icons.play_circle,
-                color: Colors.white,
+                color: Colors.orange,
               ),
             ),
           ],

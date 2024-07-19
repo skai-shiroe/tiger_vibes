@@ -57,10 +57,11 @@ class LyricsPage extends StatelessWidget {
                   child: Text(
                     lyrics,
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 25,
                       color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
-                    // textAlign: TextAlign.justify,
+                    //textAlign: TextAlign.center,
                   ),
                 ),
               ),

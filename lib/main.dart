@@ -24,12 +24,14 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/', page: () => const WelcomePage()),
         GetPage(name: '/song', page: () => const SongPage()),
         GetPage(name: '/playlist', page: () => const PlaylistPage()),
-        GetPage(name: '/lyrics', page: () => LyricsPage(
+        GetPage(
+          name: '/lyrics',
+          page: () => LyricsPage(
             lyrics: Get.parameters['lyrics'] ?? '',
             songTitle: Get.parameters['songTitle'] ?? '',
             artist: Get.parameters['artist'] ?? '',
-          ),),
-
+          ),
+        ),
       ],
     );
   }

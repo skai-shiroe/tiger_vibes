@@ -4,7 +4,6 @@ import 'package:tiger_vibes/models/playlist_model.dart';
 class PlaylistPage extends StatelessWidget {
   const PlaylistPage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     Playlist playlist = Playlist.playlists[0];
@@ -81,7 +80,7 @@ class PlaylistSongs extends StatelessWidget {
                     .copyWith(color: Colors.white)),
             trailing: const Icon(
               Icons.more_vert,
-              color: Colors.white,
+              color: Colors.orange,
             ),
           );
         });
