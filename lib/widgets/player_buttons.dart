@@ -124,6 +124,7 @@ class PlayerButtons extends StatelessWidget {
           onPressed: () => _showLyrics(context),
           icon: SvgPicture.asset(
             'assets/icons/mic-vocal.svg',
+            // ignore: deprecated_member_use
             color: Colors.white,
             width: 25,
             height: 25,

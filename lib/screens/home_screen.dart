@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:tiger_vibes/models/playlist_model.dart';
 import 'package:tiger_vibes/models/song_model.dart';
 import 'package:tiger_vibes/widgets/playlist_card.dart';
@@ -184,6 +186,27 @@ class CustomNavBar extends StatelessWidget {
         selectedItemColor: Colors.orange,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        onTap: (index) {
+          // Navigation basée sur l'index du bouton sélectionné
+          switch (index) {
+            case 0:
+              // Home
+              Get.toNamed('/');
+              break;
+            case 1:
+              // Favorites
+              Get.toNamed('/favorites'); // Assurez-vous que la route '/favorites' est définie
+              break;
+            case 2:
+              // Play (Music)
+              Get.toNamed('/local_music'); // Navigate to LocalMusicScreen
+              break;
+            case 3:
+              // Profile
+              Get.toNamed('/profile'); // Assurez-vous que la route '/profile' est définie
+              break;
+          }
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

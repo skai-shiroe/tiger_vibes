@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class SeekBarData {
@@ -28,17 +27,12 @@ class SeekBar extends StatefulWidget {
 }
 
 class _SeekBarState extends State<SeekBar> {
-  double? dragValue;
+  double? _dragValue;
 
-  String formatDuration(Duration? duration) {
-    if (duration == null) {
-      return '--:--';
-    } else {
-      String minutes = duration.inMinutes.toString().padLeft(2, '0');
-      String seconds =
-          duration.inSeconds.remainder(60).toString().padLeft(2, '0');
-      return '$minutes:$seconds';
-    }
+  String formatDuration(Duration duration) {
+    final minutes = duration.inMinutes.toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
   }
 
   @override
@@ -51,27 +45,26 @@ class _SeekBarState extends State<SeekBar> {
             data: SliderTheme.of(context).copyWith(
               trackHeight: 4,
               thumbShape: const RoundSliderThumbShape(
-                disabledThumbRadius: 4,
-                enabledThumbRadius: 4,
+                enabledThumbRadius: 6,
               ),
               overlayShape: const RoundSliderOverlayShape(
-                overlayRadius: 10,
+                overlayRadius: 12,
               ),
               activeTrackColor: Colors.orange,
-              inactiveTrackColor: const Color.fromARGB(255, 0, 0, 0),
-              thumbColor: Color.fromARGB(255, 255, 255, 255),
-              overlayColor: Colors.white,
+              inactiveTrackColor: Colors.white70,
+              thumbColor: Colors.white,
+              overlayColor: Colors.white.withOpacity(0.2),
             ),
             child: Slider(
               min: 0.0,
               max: widget.duration.inMilliseconds.toDouble(),
               value: min(
-                dragValue ?? widget.position.inMilliseconds.toDouble(),
+                _dragValue ?? widget.position.inMilliseconds.toDouble(),
                 widget.duration.inMilliseconds.toDouble(),
               ),
               onChanged: (value) {
                 setState(() {
-                  dragValue = value;
+                  _dragValue = value;
                 });
                 if (widget.onChanged != null) {
                   widget.onChanged!(Duration(milliseconds: value.round()));
@@ -79,19 +72,17 @@ class _SeekBarState extends State<SeekBar> {
               },
               onChangeEnd: (value) {
                 setState(() {
-                  dragValue = value;
+                  _dragValue = value;
                 });
                 if (widget.onChangedEnd != null) {
                   widget.onChangedEnd!(Duration(milliseconds: value.round()));
                 }
-                dragValue = null; // Reset dragValue after user interaction ends
+                _dragValue = null; // Reset dragValue after user interaction ends
               },
             ),
           ),
         ),
-        Text(
-          formatDuration(widget.duration),
-        ),
+        Text(formatDuration(widget.duration)),
       ],
     );
   }

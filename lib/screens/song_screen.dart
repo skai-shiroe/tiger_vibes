@@ -72,7 +72,7 @@ class SongPageState extends State<SongPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0x00000000),
         elevation: 0,
       ),
       extendBodyBehindAppBar: true,
