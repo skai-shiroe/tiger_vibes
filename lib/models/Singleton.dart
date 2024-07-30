@@ -1,5 +1,5 @@
 import 'package:just_audio/just_audio.dart';
-import 'package:rxdart/rxdart.dart' as rxdart;
+
 
 class AudioPlayerSingleton {
   static final AudioPlayerSingleton _instance = AudioPlayerSingleton._internal();

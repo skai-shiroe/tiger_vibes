@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:tiger_vibes/models/songs-models.dart';
 import 'package:rxdart/rxdart.dart' as rxdart;
+import 'package:tiger_vibes/screens/music_player.dart';
+import 'package:tiger_vibes/screens/music_player_controls.dart';
 import 'package:tiger_vibes/widgets/seekbar.dart';
 
 class MusicPlayerPage extends StatefulWidget {
@@ -19,23 +20,23 @@ class MusicPlayerPage extends StatefulWidget {
 }
 
 class _MusicPlayerPageState extends State<MusicPlayerPage> {
-  late AudioPlayer _audioPlayer;
   late int _currentIndex;
   late List<AppSongModel> _songs;
+  late MusicPlayer _musicPlayer;
 
   @override
   void initState() {
     super.initState();
     _songs = widget.songs;
     _currentIndex = widget.currentIndex;
-    _audioPlayer = AudioPlayer();
+    _musicPlayer = MusicPlayer(); // Singleton instance
     _playCurrentSong();
   }
 
   void _playCurrentSong() async {
     final song = _songs[_currentIndex];
-    await _audioPlayer.setFilePath(song.data);
-    _audioPlayer.play();
+    await _musicPlayer.audioPlayer.setFilePath(song.data);
+    _musicPlayer.audioPlayer.play();
   }
 
   void _playNext() {
@@ -52,16 +53,10 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
     });
   }
 
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
-  }
-
   Stream<SeekBarData> get seekBarDataStream =>
       rxdart.Rx.combineLatest2<Duration, Duration?, SeekBarData>(
-        _audioPlayer.positionStream,
-        _audioPlayer.durationStream,
+        _musicPlayer.audioPlayer.positionStream,
+        _musicPlayer.audioPlayer.durationStream,
         (position, duration) =>
             SeekBarData(position, duration ?? Duration.zero),
       );
@@ -88,80 +83,17 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/cover.png'),
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
             ),
           ),
           const BackgroundFilter(),
           MusicPlayerControls(
-            song: song,
-            audioPlayer: _audioPlayer,
+            song: song, 
+            audioPlayer: _musicPlayer.audioPlayer,
             seekBarDataStream: seekBarDataStream,
             onNext: _playNext,
             onPrevious: _playPrevious,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MusicPlayerControls extends StatelessWidget {
-  const MusicPlayerControls({
-    Key? key,
-    required this.song,
-    required this.audioPlayer,
-    required this.seekBarDataStream,
-    required this.onNext,
-    required this.onPrevious,
-  }) : super(key: key);
-
-  final AppSongModel song;
-  final AudioPlayer audioPlayer;
-  final Stream<SeekBarData> seekBarDataStream;
-  final VoidCallback onNext;
-  final VoidCallback onPrevious;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            song.title,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            song.artist,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(color: Colors.white70, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 15),
-          StreamBuilder<SeekBarData>(
-            stream: seekBarDataStream,
-            builder: (context, snapshot) {
-              final positionData = snapshot.data;
-              return SeekBar(
-                position: positionData?.position ?? Duration.zero,
-                duration: positionData?.duration ?? Duration.zero,
-                onChanged: audioPlayer.seek,
-                onChangedEnd: audioPlayer.seek,
-              );
-            },
-          ),
-          MusicPlayerButtons(
-            audioPlayer: audioPlayer,
-            onNext: onNext,
-            onPrevious: onPrevious,
           ),
         ],
       ),
@@ -200,53 +132,6 @@ class BackgroundFilter extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class MusicPlayerButtons extends StatelessWidget {
-  const MusicPlayerButtons({
-    Key? key,
-    required this.audioPlayer,
-    required this.onNext,
-    required this.onPrevious,
-  }) : super(key: key);
-
-  final AudioPlayer audioPlayer;
-  final VoidCallback onNext;
-  final VoidCallback onPrevious;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.skip_previous),
-          color: Colors.white,
-          onPressed: onPrevious,
-        ),
-        IconButton(
-          icon: const Icon(Icons.play_arrow),
-          color: Colors.white,
-          onPressed: () => audioPlayer.play(),
-        ),
-        IconButton(
-          icon: const Icon(Icons.pause),
-          color: Colors.white,
-          onPressed: () => audioPlayer.pause(),
-        ),
-        IconButton(
-          icon: const Icon(Icons.stop),
-          color: Colors.white,
-          onPressed: () => audioPlayer.stop(),
-        ),
-        IconButton(
-          icon: const Icon(Icons.skip_next),
-          color: Colors.white,
-          onPressed: onNext,
-        ),
-      ],
     );
   }
 }
