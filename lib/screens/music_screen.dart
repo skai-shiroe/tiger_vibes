@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tiger_vibes/models/songs-models.dart';
 import 'package:tiger_vibes/screens/musicPlayer_page.dart';
-import '../music_service.dart'; 
+import '../music_service.dart';
+
 class MusicListPage extends StatefulWidget {
   const MusicListPage({super.key});
 
@@ -15,7 +16,8 @@ class _MusicListPageState extends State<MusicListPage> {
   @override
   void initState() {
     super.initState();
-    _songs = MusicService().fetchAllMusicFiles(); // Chargement de toutes les musiques
+    _songs = MusicService()
+        .fetchAllMusicFiles(); // Chargement de toutes les musiques
   }
 
   @override
@@ -76,6 +78,10 @@ class _MusicListPageState extends State<MusicListPage> {
                     style: const TextStyle(
                       color: Colors.grey,
                     ),
+                  ),
+                  trailing: const Icon(
+                    Icons.more_vert,
+                    color: Colors.orange,
                   ),
                   onTap: () {
                     Navigator.push(

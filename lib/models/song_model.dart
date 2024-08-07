@@ -14,20 +14,8 @@ class Song {
   });
 
   static List<Song> songs = [
-    Song(
-      title: 'Risky',
-      description: 'Risky',
-      artist: 'Davido',
-      url: 'assets/music/risky.mp3',
-      coverUrl: 'assets/images/risky.jpg',
-    ),
-    Song(
-      title: 'Aye',
-      artist: 'Davido',
-      description: 'Aye',
-      url: 'assets/music/aye.mp3',
-      coverUrl: 'assets/images/aye.jpg',
-    ),
+   
+ 
     Song(
       title: 'Bolingo',
       artist: 'Franglish',
@@ -42,20 +30,7 @@ class Song {
       url: 'assets/music/position.mp3',
       coverUrl: 'assets/images/position.png',
     ),
-    Song(
-      title: 'l’eau',
-      artist: 'Lefa',
-      description: 'vas prendre',
-      url: 'assets/music/eau.mp3',
-      coverUrl: 'assets/images/lefa1.jpg',
-    ),
-    Song(
-      title: 'Penalty',
-      artist: 'Lefa',
-      description: 'Penalty',
-      url: 'assets/music/penalty.mp3',
-      coverUrl: 'assets/images/penalty.jpg',
-    ),
+
     Song(
       title: 'Fast',
       artist: 'Juice WRLD',
@@ -70,12 +45,6 @@ class Song {
       url: 'assets/music/god.mp3',
       coverUrl: 'assets/images/god.jpg',
     ),
-    Song(
-      title: 'l’argent',
-      artist: 'Youssoupha',
-      description: 'Money',
-      url: 'assets/music/vacation.mp3',
-      coverUrl: 'assets/images/youss.jpg',
-    ),
+
   ];
 }

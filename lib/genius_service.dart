@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+// ignore: depend_on_referenced_packages
 import 'package:html/parser.dart' show parse;
-import 'package:html/dom.dart';
 import 'package:http/http.dart' as http;
 
 class GeniusService {

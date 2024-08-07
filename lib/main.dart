@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: '/local_music',
             page: () =>
-                const MusicListPage()), // Écran pour afficher les musiques locales
+                const MusicListPage()), 
       ],
     );
   }

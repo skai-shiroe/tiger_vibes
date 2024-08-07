@@ -10,12 +10,13 @@ class MusicPlayerPage extends StatefulWidget {
   final int currentIndex;
 
   const MusicPlayerPage({
-    Key? key,
+    super.key,
     required this.songs,
     required this.currentIndex,
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _MusicPlayerPageState createState() => _MusicPlayerPageState();
 }
 
@@ -102,7 +103,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
 }
 
 class BackgroundFilter extends StatelessWidget {
-  const BackgroundFilter({Key? key}) : super(key: key);
+  const BackgroundFilter({super.key});
 
   @override
   Widget build(BuildContext context) {
